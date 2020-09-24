@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.example.bmi"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -21,17 +22,42 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
+    implementation "com.google.gms:google-services:4.3.3"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.firebase:firebase-database:19.4.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    // https://developers.google.com/gsuite/guides/android
+    // https://mvnrepository.com/artifact/com.google.api-client/google-api-client-android
+    implementation('com.google.api-client:google-api-client-android:1.28.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude module: 'guava-jdk5'
+    }
+    // https://mvnrepository.com/artifact/com.google.apis/google-api-services-sheets
+    implementation('com.google.apis:google-api-services-sheets:v4-rev571-1.25.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude module: 'guava-jdk5'
+    }
 
 }

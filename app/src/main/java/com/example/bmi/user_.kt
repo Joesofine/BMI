@@ -10,19 +10,19 @@ import java.util.*
 public object user_ {
 
     private val ourInstance: user_ = user_
-    var bmiArr: ArrayList<User> = ArrayList<User>()
+    var bmiArr: ArrayList<Person> = ArrayList<Person>()
     public fun getInstance(): com.example.bmi.user_? {
         return ourInstance
     }
 
     private fun user_() {}
 
-    fun setBmiArr(arr: ArrayList<User>?, context: Context?) {
+    fun setBmiArr(arr: ArrayList<Person>?, context: Context?) {
         saveUser(context!!, arr!!)
     }
 
 
-    fun getBmiArr(context: Context?): ArrayList<User>? {
+    fun getBmiArr(context: Context?): ArrayList<Person>? {
         bmiArr.clear()
         loadUser(context!!)
         return bmiArr
@@ -30,7 +30,7 @@ public object user_ {
 
 
 
-    private fun saveUser(context: Context, arr: ArrayList<User>) {
+    private fun saveUser(context: Context, arr: ArrayList<Person>) {
         val sharedPreferences = context.getSharedPreferences("Users", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
@@ -43,7 +43,7 @@ public object user_ {
         val sharedPreferences = context.getSharedPreferences("Users", Context.MODE_PRIVATE)
         val gson = Gson()
         val json = sharedPreferences.getString("bmiArr", null)
-        val type = object : TypeToken<ArrayList<User?>?>() {}.type
+        val type = object : TypeToken<ArrayList<Person?>?>() {}.type
         bmiArr = gson.fromJson(json, type)
         if (bmiArr == null) {
             bmiArr = ArrayList()

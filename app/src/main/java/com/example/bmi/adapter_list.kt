@@ -8,12 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import java.util.ArrayList
 
-class adapter_list(context: Context, arr: ArrayList<User>) : ArrayAdapter<String?>(
+class adapter_list(context: Context, arr: ArrayList<Person>) : ArrayAdapter<String?>(
     context,
     R.layout.list_element
 ) {
     private var context1 = context
-    private val bmiArr: ArrayList<User> = arr
+    private val bmiArr: ArrayList<Person> = arr
     override fun getCount(): Int {
         return bmiArr.size
     }
@@ -24,21 +24,21 @@ class adapter_list(context: Context, arr: ArrayList<User>) : ArrayAdapter<String
         if (convertView == null) {
             val mInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = mInflater.inflate(R.layout.list_element, parent, false)
-            viewHolder.name = convertView!!.findViewById<TextView>(R.id.Name_list)
-            viewHolder.bmi = convertView.findViewById<TextView>(R.id.BMI_list)
+            viewHolder.Name = convertView!!.findViewById<TextView>(R.id.Name_list)
+            viewHolder.BMI = convertView.findViewById<TextView>(R.id.BMI_list)
             convertView.setTag(viewHolder)
         } else {
             viewHolder = convertView.tag as ViewHolder
         }
-        viewHolder.name?.text = bmiArr[position].Name
-        viewHolder.bmi?.text = bmiArr[position].BMI.toString()
+        viewHolder.Name?.text = bmiArr[position].Name
+        viewHolder.BMI?.text = bmiArr[position].BMI.toString()
 
         return convertView
     }
 
     internal class ViewHolder {
-        var name: TextView? = null
-        var bmi: TextView? = null
+        var Name: TextView? = null
+        var BMI: TextView? = null
     }
 
     init {
